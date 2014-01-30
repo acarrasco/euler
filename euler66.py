@@ -4,7 +4,7 @@ Created on Sun Nov  4 23:26:41 2012
 
 @author: fortran
 """
-from euler import solve_diophantine
+from euler_common import solve_diophantine
 
 def not_perfect_square(n):
     int_sq = int(n**0.5)
