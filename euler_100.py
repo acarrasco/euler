@@ -1,27 +1,17 @@
-import math
-from itertools import ifilter, count
+import itertools
 
-def find_blue_slow(total):
-	d = total*(total-1)
-	n = math.ceil((d // 2)**0.5)
-	if n * (n-1) * 2 == d:
-		return n, total
-	else:
-		return None
+def diophantine_pairs(n):
+	if n == 0:
+		return 1
+	elif n == 1:
+		return 3
+	return 6 * diophantine_pairs(n-1) - diophantine_pairs(n-2) - 2 
 
-def solve_slow():
-	print next(ifilter(None, (find_blue(x) for x in count(10**12))))
+def generate_solutions():
+	return itertools.imap(diophantine_pairs, itertools.count())
 
-def has_fifty_percent(blues):
-	denominator = blues * (blues-1) * 2
-	total = int(denominator ** 0.5)
-	return total * (total + 1) == denominator
-
-def solve_fast(total):
-	d = total * (total - 1)
-	first_guess = int(math.ceil((d // 2)**0.5))
-	print next(x for x in count(first_guess) if has_fifty_percent(x))
-	
+def total(blues):
+	return (blues * (blues-1) * 2)**0.5
 
 if __name__ == '__main__':
-	solve_fast(10**12 + 1)
+	print next(itertools.ifilter(lambda x: total(x)> 10**12, generate_solutions()))
