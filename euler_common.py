@@ -7,9 +7,10 @@ _primes = map(int, open("10000primes.txt").read().split())
 
 def _grow_primes():
     n = _primes[-1] + 2
-    while not all(n % p for p in _primes):
-        n += 2
-    _primes.append(n)
+    for _ in range(100):
+        while not all(n % p for p in _primes):
+            n += 2
+        _primes.append(n)
 
 def is_prime(n):
     if _primes[-1] < n:
@@ -21,9 +22,9 @@ def next_prime(n):
     i = bisect.bisect_left(_primes, n+1)
     if i < len(_primes):
         return _primes[i]
-    while _primes[-1] < n:
+    while _primes[-1] <= n:
         _grow_primes()
-    return _primes[-1]
+    return _primes[bisect.bisect(_primes, n)]
 
 def primes():
     p = 1
