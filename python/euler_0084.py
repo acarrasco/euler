@@ -1,4 +1,5 @@
 import random
+import heapq
 
 chance_cards = [
 	lambda p:  0,	 #advance to GO
@@ -58,4 +59,6 @@ def move():
 for i in range(1000000):
 	move()
 
-print(sorted((times, idx) for idx, times in enumerate(times_visited))[:-4:-1])
+most_visited = heapq.nlargest(3, range(40), key=times_visited.__getitem__)
+
+print(''.join(map(str, most_visited)))

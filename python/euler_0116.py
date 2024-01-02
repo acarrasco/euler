@@ -2,7 +2,6 @@ import math
 
 def p(a, b):
 	res = math.factorial(a+b) // (math.factorial(a) * math.factorial(b))
-	#print a, b, res
 	return res
 
 def ways_fixed_size(size, block_size):
@@ -11,5 +10,4 @@ def ways_fixed_size(size, block_size):
 def ways(size):
 	return sum(ways_fixed_size(size, block_size) for block_size in (2, 3, 4))
 
-print ways(5)
-print ways(50)
+print(ways(50))

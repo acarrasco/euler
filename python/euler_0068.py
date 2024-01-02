@@ -11,4 +11,4 @@ def normalize(p):
 	lowestIdx = p.index(lowest)
 	return "".join("".join(map(str,(p[i%10], p[(i+1)%10], p[(i+3)%10]))) for i in range(lowestIdx, lowestIdx+9, 2))
 
-print max(normalize((10,)+p) for p in itertools.permutations(range(1,10)) if check((10,)+p))
+print(max(normalize((10,)+p) for p in itertools.permutations(range(1,10)) if check((10,)+p)))

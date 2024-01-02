@@ -1,5 +1,8 @@
+def z(*args):
+	return tuple(zip(*args))
+
 def ntuples(lst, n):
-    return zip(*[lst[i:]+lst[:i] for i in range(n)])
+    return z(*[lst[i:]+lst[:i] for i in range(n)])
 
 def x_product(a, b):
 	x,y = a
@@ -8,7 +11,7 @@ def x_product(a, b):
 
 def parse(line):
 	l = [int(i) for i in line.split(",")]
-	return zip(l[0::2], l[1::2])
+	return z(l[0::2], l[1::2])
 
 def minus(a, b):
 	x,y = a
@@ -17,7 +20,7 @@ def minus(a, b):
 
 def all_equal(seq):
 	it = iter(seq)
-	first = it.next()
+	first = next(it)
 	return all(i==first for i in it)
 
 def inside_convex(poly, point):
@@ -26,5 +29,4 @@ def inside_convex(poly, point):
 	x_products = (x_product(a,b) for a,b in zip(point_v, edges))
 	return all_equal(int(i/abs(i)) for i in x_products)
 
-print(sum(inside_convex(parse(line), (0,0)) for line in file("triangles.txt")))
-
+print(sum(inside_convex(parse(line), (0,0)) for line in open('triangles.txt')))

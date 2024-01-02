@@ -1,12 +1,10 @@
 from collections import Counter
 from math import factorial
-from operator import mul
-
-def prod(seq): return reduce(mul, seq)
+from euler_common import prod
 
 def permutations(repeated_elements):
 	total = factorial(sum(repeated_elements))
-	equivalent = prod(map(factorial, repeated_elements))
+	equivalent = prod(*map(factorial, repeated_elements))
 	return total // equivalent
 
 def block_choices(remaining_size, available_blocks, used_blocks):
@@ -23,5 +21,4 @@ def ways(size):
 	blocks = (1, 2, 3, 4)
 	return sum(map(permutations, block_choices(size, blocks, ())))
 
-print ways(5)
-print ways(50)
+print(ways(50))

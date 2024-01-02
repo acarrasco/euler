@@ -1,4 +1,6 @@
-08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
+import euler_common
+import itertools
+input = '''08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
 81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
 52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91
@@ -17,4 +19,28 @@
 04 42 16 73 38 25 39 11 24 94 72 18 08 46 29 32 40 62 76 36
 20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16
 20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
-01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48
+01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48'''
+
+grid = [[int(n) for n in line.split()] for line in input.splitlines()]
+
+
+adjacency = [(0, 1), (1, 0), (1, 1), (1, -1)]
+
+def group(coords, direction):
+	i, j = coords
+	di, dj = direction
+	return tuple(grid[i+di*n][j+dj*n] for n in range(4))
+
+def in_bounds(coords, delta):
+	i, j = coords
+	di, dj = delta
+	return 0 <= i + di * 3 < len(grid) and 0 <= j + dj * 3 < len(grid[i])
+
+def all_groups():
+	for i in range(len(grid)):
+		for j in range(len(grid[i])):
+			for (di, dj) in adjacency:
+				if in_bounds((i, j), (di, dj)):
+					yield group((i, j), (di, dj))
+
+print(max(itertools.starmap(euler_common.prod, all_groups())))

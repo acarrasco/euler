@@ -8,10 +8,10 @@ def diophantine_pairs(n):
 	return 6 * diophantine_pairs(n-1) - diophantine_pairs(n-2) - 2 
 
 def generate_solutions():
-	return itertools.imap(diophantine_pairs, itertools.count())
+	for i in itertools.count():
+		yield diophantine_pairs(i)
 
 def total(blues):
 	return (blues * (blues-1) * 2)**0.5
 
-if __name__ == '__main__':
-	print next(itertools.ifilter(lambda x: total(x)> 10**12, generate_solutions()))
+print(next(filter(lambda x: total(x)> 10**12, generate_solutions())))

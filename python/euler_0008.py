@@ -1,5 +1,4 @@
 import euler_common
-import itertools
 
 input = """73167176531330624919225119674426574742355349194934
 96983520312774506326239578318016984801869478851843
@@ -24,4 +23,4 @@ input = """73167176531330624919225119674426574742355349194934
 
 digits = map(int, ''.join(input.splitlines()))
 
-print max(itertools.starmap(euler_common.prod, euler_common.by_tuples(digits, 13)))
+print(max(euler_common.prod(*adj) for adj in euler_common.by_tuples(digits, 13)))

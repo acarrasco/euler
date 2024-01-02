@@ -21,4 +21,4 @@ for m in range(2, 1200):
 for t in triangles:
         lengths[sum(t)] += 1
 
-print sum(n == 1 for n in lengths.itervalues())
+print(sum(n == 1 for n in lengths.values()))

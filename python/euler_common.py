@@ -3,7 +3,7 @@ import bisect
 import math
 import collections
 
-_primes = map(int, open("10000primes.txt").read().split())
+_primes = list(map(int, open("10000primes.txt").read().split()))
 
 def _grow_primes():
     n = _primes[-1] + 2

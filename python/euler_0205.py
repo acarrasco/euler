@@ -7,11 +7,11 @@ def make_hist(sides, dices):
         return [float(i)/(sides**dices) for i in counts]
 
 def make_cdf(hist):
-        return [sum(hist[:i+1]) for i in xrange(len(hist))]
+        return [sum(hist[:i+1]) for i in range(len(hist))]
 
 hist_peter = make_hist(4, 9)
 cdf_colin = make_cdf(make_hist(6, 6))
-p = sum(hist_peter[i]*cdf_colin[i-1] for i in xrange(1,37))
+p = sum(hist_peter[i]*cdf_colin[i-1] for i in range(1,37))
 
 print(format(p, ".7f"))
 
